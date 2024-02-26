@@ -81,7 +81,7 @@ resource "aws_route_table" "private_route_table" {
   }
 
   tags = {
-    Name = "Public route table"
+    Name = "Private route table"
   }
 }
 
@@ -186,7 +186,7 @@ resource "aws_security_group" "private_sg" {
 
 //9. create 2 EC2 public and private subnet
 resource "aws_instance" "public_ec2" {
-  ami = "ami-07a6e3b1c102cdba8"
+  ami = "ami-0eb4694aa6f249c52"
   instance_type = "t2.micro"
   key_name = "vpc-keypair"
   subnet_id = aws_subnet.public_subnet[0].id
@@ -196,10 +196,12 @@ resource "aws_instance" "public_ec2" {
     Name: "EC2_Public"        
   }
 
-
+}
+output "public_ec2_ip" {
+  value = aws_instance.public_ec2.public_ip
 }
 resource "aws_instance" "private_ec2" {
-  ami = "ami-07a6e3b1c102cdba8"
+  ami = "ami-0eb4694aa6f249c52"
   instance_type = "t2.micro"
   key_name = "vpc-keypair"
   subnet_id = aws_subnet.private_subnet[0].id
@@ -208,3 +210,8 @@ resource "aws_instance" "private_ec2" {
     Name: "EC2_Private"        
   }
 }
+output "private_ec2_ip"{
+  value = aws_instance.private_ec2.private_ip
+}
+
+
