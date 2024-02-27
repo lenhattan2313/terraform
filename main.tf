@@ -1,3 +1,8 @@
+# terraform {
+#   backend "s3" {
+#     bucket = "value"
+#   }
+# } remote backend will use with s3 used for storaged and dynamoDB used for locking
 provider "aws" {
   region = "ap-southeast-1"
   access_key = var.aws_access_key
